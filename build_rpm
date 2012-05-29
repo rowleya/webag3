@@ -1,0 +1,35 @@
+#!/bin/bash
+basedir=`pwd`
+builddir=$basedir/build
+rpm_build_macrofile=$builddir/rpmmacros
+rpm_macro_files=/usr/lib/rpm/macros:/usr/lib/rpm/platform/`uname -m`-linux/macros:/etc/rpm/macros.*:/etc/rpm/macros:~/.rpmmacros:$rpm_build_macrofile
+rpm_systemrc_file=`for rcf in /usr/lib/rpmrc /usr/lib/rpm/rpmrc; do [ -e $rcf ] && echo "$rcf" && break; done`
+# we need --rcfile for older rpmbuild versions (< 4.6) and --macros for newer (>= 4.6)
+rpmbuild_command="rpmbuild --macros=$rpm_macro_files --rcfile=$rpm_systemrc_file"
+rpmresign_command="rpm --resign --macros=$rpm_macro_files --rcfile=$rpm_systemrc_file"
+[ -d $builddir ] || mkdir -p $builddir
+rm -rf $builddir/*
+cat <<EOF > $rpm_build_macrofile
+%_topdir        %(pwd)
+%_sourcedir     %{_topdir}/build
+%_specdir       %{_topdir}/build
+%_tmppath       %{_topdir}/build
+%_builddir      %{_topdir}/build
+%_buildroot     %{_topdir}/build/%{_tmppath}/%{name}-%{version}-root
+%_rpmdir        %{_topdir}/dist
+%_srcrpmdir     %{_topdir}/dist
+%_rpmfilename   %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
+%packager       %(echo ${USER}@)%(hostname -f) 
+EOF
+name=`sed -n 's/^Name:\s*//p' $basedir/webag3.spec`
+version=`sed -n 's/^Version:\s*//p' $basedir/webag3.spec`
+pkgdir=$builddir/$name-$version
+mkdir -p $pkgdir/lib
+cp -r $basedir/etc $pkgdir
+cp -r $basedir/www $pkgdir
+cp $basedir/lib/*.jar $pkgdir/lib
+cp $basedir/webag3.jar $pkgdir
+cp $basedir/log4j.properties $pkgdir
+cp $basedir/webag3.sh $pkgdir
+(cd $builddir && tar czvf $name-$version.tar.gz $name-$version)
+$rpmbuild_command -v -v -v -bb webag3.spec

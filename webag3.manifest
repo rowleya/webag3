@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: . lib/ant.jar lib/commons-el.jar lib/commons-logging.jar lib/org.mortbay.jetty.jar lib/org.mortbay.jmx.jar lib/xercesImpl.jar lib/xml-apis.jar lib/smack.jar lib/smackx.jar lib/javax.servlet.jar lib/jasper-compiler.jar lib/jasper-runtime.jar lib/tools.jar lib/ag3.jar
+Main-Class: webag3.Server

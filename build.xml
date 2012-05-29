@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="compile" name="webag3">
+	<property file="build.properties"/>
+	<property name="build.home" value="${basedir}/build"/>
+	<property name="build.classes" value="${build.home}/classes"/>
+	<property name="jar.webag3.name" value="webag3.jar"/>
+	<path id="libs.classpath">
+		<fileset dir="${basedir}/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	 <manifestclasspath property="manifest.classpath" jarfile="${jar.webag3.name}">
+		<classpath refid="libs.classpath"/>
+	</manifestclasspath>
+    <!-- create build directories -->
+    <target name="setup">
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${build.classes}"/>
+    </target>
+
+	<!-- compile -->
+	<target name="compile" depends="setup">
+		<javac fork="true" debug="${debug}" verbose="${verbose}" destdir="${build.classes}"
+				srcdir="${basedir}/webag3" sourcepath="" includeAntRuntime="false"
+				source="1.5" target="1.5">
+			<classpath>
+				<path refid="libs.classpath"/>
+				<pathelement location="${basedir}/webag3"/>
+				<pathelement location="${build.home}"/>
+			</classpath>
+			<include name="*.java"/>
+		</javac>
+	</target>
+	<target name="jar" depends="compile">
+		<jar destfile="${jar.webag3.name}">
+			<fileset dir="${build.classes}" excludes="services/**"/>
+			<manifest>
+				<attribute name="Class-Path" value=". ${manifest.classpath}"/>
+				<attribute name="Main-Class" value="webag3.Server"/>
+			</manifest>
+		</jar>
+	</target>
+	<target name="clean-check">
+		<available file="${build.classes}" type="dir" property="build.classes.present"/>
+	</target>
+	<target name="clean" depends="clean-check" if="${build.classes.present}">
+		<delete verbose="${verbose}" includeemptydirs="true">
+			<fileset dir="${build.classes}"/>
+		</delete>
+	</target>
+	<target name="distclean" depends="clean">
+		<delete verbose="${verbose}">
+			<fileset file="${jar.webag3.name}"/>
+		</delete>
+	</target>
+</project>
