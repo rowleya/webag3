@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="C:/Documents and Settings/zzalsar4/My Documents/workspace/WebAG3/lib/ag3.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/WebAg3/lib/ag3.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="false" manifestLocation="/WebAg3/lib/ag3.manifest" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<javaElement handleIdentifier="=Arena/&lt;ag3.soap"/>
+<javaElement handleIdentifier="=Arena/&lt;ag3.interfaces"/>
+<javaElement handleIdentifier="=Arena/&lt;ag3.interfaces.methods.venue"/>
+<javaElement handleIdentifier="=Arena/&lt;ag3.interfaces.types"/>
+</selectedElements>
+</jardesc>

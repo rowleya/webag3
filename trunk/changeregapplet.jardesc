@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="C:/Documents and Settings/zzalsar4/My Documents/workspace/WebAg3/changeregapplet.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/WebAg3/changeregapplet.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="false" manifestLocation="/WebAg3/changeregapplet.manifest" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<javaElement handleIdentifier="=WebAg3/&lt;"/>
+</selectedElements>
+</jardesc>
